@@ -191,7 +191,7 @@ def learning(episodes, fps, training):
     if (training):
         q_table = np.zeros((env.observation_space.n, env.action_space.n))
     else:
-        f = open('table.pkl', 'rb')
+        f = open('mnt/QL_results/table.pkl', 'rb')
         q_table = pickle.load(f)
         f.close()
     alpha = 0.9
@@ -223,7 +223,7 @@ def learning(episodes, fps, training):
         print(f"Episode: {i}")
     if training:
         print("Training finished.\n")
-        f = open("table.pkl", "wb")
+        f = open("mnt/QL_results/table.pkl", "wb")
         pickle.dump(q_table, f)
         f.close()
 

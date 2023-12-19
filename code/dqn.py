@@ -29,7 +29,7 @@ class MyWorld(gym.Env):
         self.target_positions = [99, 90, 9, 33]
         self.target_index = 0
         self.path_index = 2
-        self.path = 'trained_model10x10_1.h5'
+        self.path = 'mnt/DQN_results/trained_model10x10_1.h5'
 
     def get_obs(self):
         return self.agent_location
@@ -79,7 +79,7 @@ class MyWorld(gym.Env):
         else:
             if self.agent_location == self.target_location:
                 reward = 10
-                self.path = 'trained_model10x10_' + str(self.path_index) + '.h5'
+                self.path = 'mnt/DQN_results/trained_model10x10_' + str(self.path_index) + '.h5'
                 self.target_location = self.target_positions[self.target_index]
                 self.target_index = (self.target_index + 1) % len(self.target_positions)
                 terminated = True
@@ -229,7 +229,7 @@ def learning(train_episodes, max_steps, batch_size, fps, training):
         agent = Agent(state_size, action_size)
     else:
         agent = Agent(state_size, action_size)
-        agent.model = load_model('trained_model10x10_1.h5')
+        agent.model = load_model('mnt/DQN_results/trained_model10x10_1.h5')
     if training:
         count = 0
         print("Training started.\n")
@@ -257,10 +257,10 @@ def learning(train_episodes, max_steps, batch_size, fps, training):
             if len(agent.memory) > batch_size:
                 agent.replay(batch_size, episode)
             if episode % 100 == 0:
-                agent.model.save('trained_model10x10.h5')
-                print("trained_model10x10.h2 save.\n")
+                agent.model.save('mnt/DQN_results/trained_model10x10.h5')
+                print("trained_model10x10.h5 save.\n")
         print("Training finished.\n")
-        agent.model.save('trained_model10x10.h5')
+        agent.model.save('mnt/DQN_results/trained_model10x10.h5')
     else:
         state = env.reset()
         for episode in range(train_episodes):

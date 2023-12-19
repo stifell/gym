@@ -295,7 +295,7 @@ def learning(train_episodes, max_steps, batch_size, fps, training):
         reward_path = reward_path + f"test{4}_episode{train_episodes}" + ".pth"
     else:
         agent = Agent(state_size, action_size)
-        agent.model = load_model('trained_model10x10_1.h5')
+        agent.model = load_model('mnt/DQN_results/trained_model10x10_1.h5')
         checkpoint_path = dir + "PPO_results/test5_episode10000.pth"
         ppo_agent.load(checkpoint_path)
     if training:
